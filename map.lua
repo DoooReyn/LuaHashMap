@@ -4,6 +4,36 @@
 -- Comment: HashMap
 ---------------------------------
 
+function table.keyAsValue(...)
+    local arr = {...}
+    local ret = {}
+    for _,v in ipairs(arr) do
+        ret[v] = v
+    end
+    return ret
+end
+
+function table.len(tbl)
+    local count = 0
+    for k, v in pairs(tbl) do
+        count = count + 1
+    end
+    return count
+end
+
+function table.print(tbl)
+    local format = string.format
+    for k,v in pairs(tbl) do
+        print(format('[%s] => ', k), v)
+    end
+end
+
+DATA_TYPE = table.keyAsValue('boolean', 'number', 'string', 'function', 'table', 'thread', 'nil')
+
+function checkType(v, type)
+    return v == DATA_TYPE[type]
+end
+
 local function checkHashType(tp)
     if not (tp == 'Mixed' or DATA_TYPE[tp]) then
         tp = 'Mixed'
